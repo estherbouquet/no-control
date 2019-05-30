@@ -12,6 +12,8 @@ import org.openkinect.freenect.*;
 import org.openkinect.freenect2.*;
 import org.openkinect.processing.*;
 
+import processing.serial.*;    // Importing the serial library to communicate with the Arduino
+Serial myPort;      // Initializing a vairable named 'myPort' for serial communication
 
 //on crée un nouvel objet kinect2 de type Kinect2
 Kinect2 kinect2;
@@ -20,6 +22,7 @@ int openClIndex = 1;
 
 //variable skip -> permet de "sauter" des pixels et afficher une résolution plus basse
 int skip = 8;
+
 
 int depthMean = 4000;
 int depthStandardDeviation = 4000;
@@ -42,14 +45,20 @@ void setup() {
   kinect2.initDevice(kinectIndex, openClIndex);
   img = createImage(kinect2.depthWidth, kinect2.depthHeight, RGB);
   mask = loadImage("mask-2.png");
+
+  myPort  =  new Serial (this, "/dev/ttyACM1", 9600); // Set the com port and the baud rate according to the Arduino IDE
+  myPort.bufferUntil ( '\n' );   // Receiving the data from the Arduino IDE
 }
 
+void serialEvent  (Serial myPort) {
+  skip  =  int(float (myPort.readStringUntil ( '\n' ) ));  // Changing the background color according to received data
+} 
 
 void draw() {
   imageMode(CORNERS);
   lights();
   background(0);
-  
+
   translate(width/2, height/2, 0);
   translate(-width/2, -height/2, 0);
 
