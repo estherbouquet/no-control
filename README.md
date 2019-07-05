@@ -19,3 +19,16 @@ The web user person can never see what the corporation person decides to render 
 
 Without glorifying or sacralising data, the idea here is to develop a critic of excess entropy where companies, because they *might* have a potential futur political, economical, financial, regulation interest, let themselves scan and save all our minor actions.
 
+## Installation and use
+The code is stored in the folder ``/kinect_microsoft_potentiometer``. <br>
+You need to download and install Processing 3, the Arduino IDE, [Kinect for Windows SDK](https://www.microsoft.com/en-in/download/details.aspx?id=44561) and have at least a Windows 8 version. (Tested on a Windows 10)
+
+First you need to connect the potentiometer to the Arduino Uno as it is shown in the documenation pdf. <br>
+Then you can connect the arduino to the computer via the usb port. <br>
+You need to check you have selected the right model and the right serial port in Tools.<br>
+You can then televerse your code to the arduino.<br>
+Then you can open the processing sketch.<br>
+You might need to change the name of the serial port "COM7" in the processing sketch. Put the name you have selected in your arduino IDE.<br>
+You need to connect the kinect (model xbox one also known as kinect V2), to your computer through a USB3 port.<br>
+Then you can run the sketch.<br>
+Turn the potentiometer to detail or on the opposite triangulate what captures the kinect.
