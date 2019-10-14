@@ -7,8 +7,7 @@ void setup() {
 
 void loop() {
   pot_output = analogRead (pot_pin); // Reading from the potentiometer
-  int mapped_output = map (pot_output, 0, 1023, 1, 30); // Mapping the output of potentiometer 
+  int mapped_output = map (pot_output, 0, 1023, 1, 30); // Mapping the output of potentiometer */
   Serial.println (mapped_output);     // Sending the output to Processing IDE
   delay(50);
-
 }

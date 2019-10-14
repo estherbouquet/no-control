@@ -11,10 +11,6 @@ Thomas Sanchez Lengeling.
 import KinectPV2.KJoint;
 import KinectPV2.*;
 
-import processing.serial.*;    // Importing the serial library to communicate with the Arduino
-Serial myPort;      // Initializing a vairable named 'myPort' for serial communication
-
-
 KinectPV2 kinect;
 
 int skip = 2;
@@ -22,24 +18,13 @@ int headCircleRadius = 2000;
 
 void setup() {
   size(1920, 1080, P3D);
-  //fullScreen(P3D);
+
   kinect = new KinectPV2(this);
 
   kinect.enableSkeletonColorMap(true);
   kinect.enableDepthImg(true);
 
   kinect.init();
-  noCursor();
-
-  myPort  =  new Serial (this, "COM7", 9600); // Set the com port and the baud rate according to the Arduino IDE /dev/ttyACM1
-  myPort.bufferUntil ( '\n' );   // Receiving the data from the Arduino IDE
-}
-
-
-void serialEvent  (Serial myPort) {
-  
-  
-  skip  =  int(float (myPort.readStringUntil ( '\n' ) ));  // Changing the background color according to received data
 }
 
 void draw() {
@@ -67,7 +52,7 @@ void draw() {
       // 8 épaule droite
 
       int [] depth = kinect.getRawDepthData(); 
-      print("spotted");  
+      //print("spotted");  
 
       //On commence à afficher les triangles ici :
       pushMatrix();
@@ -128,17 +113,17 @@ void drawBody(KJoint[] joints) {
   drawBone(joints, KinectPV2.JointType_Head, KinectPV2.JointType_Neck);
   drawBone(joints, KinectPV2.JointType_Neck, KinectPV2.JointType_SpineShoulder);
   drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_SpineMid);
-
+  
   drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_ShoulderRight);
   drawBone(joints, KinectPV2.JointType_SpineShoulder, KinectPV2.JointType_ShoulderLeft);
-
+  
 
   // Right Arm
   drawBone(joints, KinectPV2.JointType_ShoulderRight, KinectPV2.JointType_ElbowRight);
-
+  
   // Left Arm
   drawBone(joints, KinectPV2.JointType_ShoulderLeft, KinectPV2.JointType_ElbowLeft);
-
+  
   drawJoint(joints, KinectPV2.JointType_Head);
 }
 
